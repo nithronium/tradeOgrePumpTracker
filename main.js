@@ -26,12 +26,14 @@ function drawChart(pair,response) {
     if (typeof(chart) === 'undefined') {
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
+            zoomEnabled: true,
             theme: "light2",
             title: {
                 text: pair
             },
             data: [{
-                type: "line",
+                type: "area",
+                xValueType: "dateTime",
                 indexLabelFontSize: 16,
                 dataPoints: myPoints
             }]
@@ -70,6 +72,7 @@ function dataPointWriter(element) {
     }
 
     position = parseFloat(element.totalBuy);
-    k.push({y : position});
+    gettingdate = element.checkDate * 1000;
+    k.push({x: gettingdate, y : position});
     return k;
 }
